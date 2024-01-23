@@ -8,6 +8,7 @@ import ThemeSwitch from './components/ThemeSwitch';
 import { ThemeContext } from './context';
 import AppRouter from './AppRouter';
 import { BrowserRouter } from "react-router-dom"
+import Menu from './components/Menu';
 
 function App() {
   let [theme, setTheme]= useState("light")
@@ -17,6 +18,7 @@ function App() {
       <ThemeSwitch changeTheme={(t)=> setTheme(t)}/>
       <ThemeContext.Provider value={theme}>
         {/* <ProductList /> */}
+        <Menu />
         <AppRouter/>
       </ThemeContext.Provider>
       {/* <Checkout></Checkout> */}
