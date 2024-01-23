@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Menu(){
+    const navigate = useNavigate();
     return(
         <ul>
             <li>
@@ -12,6 +13,7 @@ function Menu(){
             <li>
                 <Link to="/checkout">Checkout</Link>
             </li>
+            <button onClick={()=> navigate("/cart")}>Cart</button>
         </ul>
     );        
 }
