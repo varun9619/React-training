@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ProductList from './Containers/ProductList';
 import Demo from './Demo';
+import Checkout from './Containers/Checkout';
+import ThemeSwitch from './components/ThemeSwitch';
+import { ThemeContext } from './context';
+import AppRouter from './AppRouter';
+import { BrowserRouter } from "react-router-dom"
 
 function App() {
+  let [theme, setTheme]= useState("light")
   return (
-    <div className="App">
+    <BrowserRouter>
       {/* <Demo></Demo> */}
-      <ProductList></ProductList>
-    </div>
+      <ThemeSwitch changeTheme={(t)=> setTheme(t)}/>
+      <ThemeContext.Provider value={theme}>
+        {/* <ProductList /> */}
+        <AppRouter/>
+      </ThemeContext.Provider>
+      {/* <Checkout></Checkout> */}
+      
+    </BrowserRouter>
   );
 }
 

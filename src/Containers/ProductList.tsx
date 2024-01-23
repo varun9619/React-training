@@ -60,8 +60,7 @@ class ProductList extends React.Component{
         // }];
 
         return(
-            <div style={{display:"flex", flexWrap:"wrap"}} >
-                
+            <div className="row" >   
                 
                 {
                     this.state.plist.map((item)=>
