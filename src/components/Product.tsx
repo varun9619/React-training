@@ -1,11 +1,15 @@
 import React from "react";
 import { ProductType } from "../types";
 import Column from "./Column";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { RootState } from "../store/store";
 
 type ProductProps = {
 
     pdata: ProductType;
     btnClick: (id:number) => void;
+    code:string;
 }
 
 class Product extends React.Component<ProductProps>{
@@ -40,13 +44,16 @@ class Product extends React.Component<ProductProps>{
         const { quantity } = this.state;
         
         return(
-            <Column size={3}>
+            <div className="card">
+            
                 {/* <h1>Component</h1>
                 <p> some more content</p>
                 <p>Hello from <h2>{name.toUpperCase()}</h2></p> */}
+                <Link to={`/details/${data.productId}?name=${data.productName}&&page=100`}>
                 <img src = {data.productImage} style={{maxWidth:"300px"}}/>
-                <h4>{data.productName}</h4>
-                <h5>{data.productPrice} RS</h5>
+                </Link>
+                <h4 className="name">{data.productName}</h4>
+                <h5 className="price">{this.props.code} {data.productPrice}</h5>
                 {this.renderStock(data.productStock, data.productId)}
                 <button type="button" onClick={()=>this.handleDecrease()}>
                     -
@@ -55,10 +62,19 @@ class Product extends React.Component<ProductProps>{
                 <button type="button" onClick={()=>this.handleIncrease()}>
                     +
                 </button>
-            </Column>
+            </div>
             
         )
     }
 }
 
-export default Product;
+//connect ()()
+const  mapStatetoProps = (state: RootState) =>{
+    return {
+        //prop: data from the store
+        code: state.currency,
+    };
+
+};
+
+export default connect(mapStatetoProps)(Product);
